@@ -22,8 +22,8 @@ jobs:
       - name: Terraform Plan
         id: plan
         env:
-          TF_VAR_SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          TF_VAR_HOST: ${{ secrets.HOST }} 
+          TF_VAR_SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+          TF_VAR_HOST: ${{secrets.HOST}} 
         run: |
           echo "==> running terraform plan, please wait..."
           terraform init && terraform plan -out=plan.out && terraform show -json plan.out > plan.out.json
@@ -41,12 +41,6 @@ jobs:
           terraform_version: 0.13.5
       - name: Code Checkout
         uses: actions/checkout@v2
-      - name: Enable Terraform Enterprise Authentication
-        run: |
-          mkdir -p ~/.terraform.d
-          echo 'credentials "app.terraform.io" {' > ~/.terraform.d/credentials.tfrc.json
-          echo '   token = "${{ secrets.TFE_TOKEN }}"'>> ~/.terraform.d/credentials.tfrc.json
-          echo '}' >> ~/.terraform.d/credentials.tfrc.json
       - name: Terraform Apply
         env:
           TF_VAR_SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
