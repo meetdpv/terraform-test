@@ -8,5 +8,5 @@ terraform {
 }
 # provider "sonarcloud" {
 #   # Configuration options
-host = var.host
+#host = var.host
 # }
